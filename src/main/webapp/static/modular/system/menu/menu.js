@@ -18,7 +18,7 @@ Menu.initColumn = function () {
         {title: '菜单名称', field: 'NAME', align: 'center', valign: 'middle', sortable: true},
         {title: '菜单编号', field: 'CODE', align: 'center', valign: 'middle', sortable: true},
         {title: '菜单父编号', field: 'PCODE', align: 'center', valign: 'middle', sortable: true},
-        {title: '请求地址', field: 'URL', align: 'center', valign: 'middle', sortable: true},
+        /*{title: '请求地址', field: 'URL', align: 'center', valign: 'middle', sortable: true},*/
         {title: '排序', field: 'NUM', align: 'center', valign: 'middle', sortable: true},
         {title: '层级', field: 'LEVELS', align: 'center', valign: 'middle', sortable: true},
         {title: '是否是菜单', field: 'isMenuName', align: 'center', valign: 'middle', sortable: true},
