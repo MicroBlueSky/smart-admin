@@ -9,7 +9,6 @@
 		<result column="pcode" property="pcode" />
 		<result column="pcodes" property="pcodes" />
 		<result column="name" property="name" />
-		<result column="icon" property="icon" />
 		<result column="url" property="url" />
 		<result column="num" property="num" />
 		<result column="levels" property="levels" />
@@ -25,7 +24,7 @@
 	</resultMap>
 
     <sql id="Base_Column_List">
-        id, code, pcode, name, icon, url, num, levels,pcodes,
+        id, code, pcode, name, url, num, levels,pcodes,
         tips, status,isopen,ismenu,create_by, create_time, update_by, update_time,ver
     </sql>
 
@@ -139,7 +138,6 @@
     <select id="getMenusByRoleIds" resultType="cn.newcapec.city.smart.core.core.node.MenuNode">
         SELECT
         m1.id AS id,
-        m1.icon AS icon,
         (
         CASE
         WHEN (m2.id = '0' OR m2.id IS NULL) THEN

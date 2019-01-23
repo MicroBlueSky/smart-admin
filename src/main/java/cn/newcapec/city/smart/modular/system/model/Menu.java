@@ -49,10 +49,6 @@ public class Menu extends Model<Menu> {
     @NotBlank
     private String name;
     /**
-     * 菜单图标
-     */
-    private String icon;
-    /**
      * url地址
      */
     @NotBlank
@@ -116,7 +112,6 @@ public class Menu extends Model<Menu> {
                 ", pcode='" + pcode + '\'' +
                 ", pcodes='" + pcodes + '\'' +
                 ", name='" + name + '\'' +
-                ", icon='" + icon + '\'' +
                 ", url='" + url + '\'' +
                 ", num=" + num +
                 ", levels='" + levels + '\'' +
