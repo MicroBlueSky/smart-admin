@@ -15,16 +15,14 @@
                             clickFun="MenuInfoDlg.showMenuSelectTree(); return false;"
                             style="background-color: #ffffff !important;"
                             selectFlag="true" selectId="pcodeTreeDiv" selectTreeId="pcodeTree" selectStyle="width:244px !important;"/>
-                    <#select id="ismenu" name="是否是菜单">
-                        <option value="1">是</option>
-                        <option value="0">不是</option>
-                    </#select>
-
                 </div>
                 <div class="col-sm-6">
                     <#input id="url" name="请求地址" value="${menu.url}" underline="true" />
                     <#input id="num" name="排序" value="${menu.num}" underline="true" />
-                    <#input id="icon" name="图标" underline="false" value="${menu.icon}"/>
+                    <#select id="ismenu" name="是否是菜单">
+                        <option value="1">是</option>
+                        <option value="0">不是</option>
+                    </#select>
                 </div>
             </div>
 

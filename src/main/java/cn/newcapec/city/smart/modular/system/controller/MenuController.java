@@ -14,6 +14,7 @@ import cn.newcapec.city.smart.core.core.node.ZTreeNode;
 import cn.newcapec.city.smart.core.core.support.BeanKit;
 import cn.newcapec.city.smart.core.core.util.ToolUtil;
 import cn.newcapec.city.smart.core.log.LogObjectHolder;
+import cn.newcapec.city.smart.core.shiro.ShiroKit;
 import cn.newcapec.city.smart.modular.system.model.Menu;
 import cn.newcapec.city.smart.modular.system.service.IMenuService;
 import cn.newcapec.city.smart.modular.system.warpper.MenuWarpper;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -108,6 +110,9 @@ public class MenuController extends BaseController {
         //设置父级菜单编号
         menuSetPcode(menu);
 
+        menu.setUpdateBy(ShiroKit.getUser().getName());
+        menu.setUpdateTime(new Date());
+
         this.menuService.updateById(menu);
         return SUCCESS_TIP;
     }
@@ -145,6 +150,8 @@ public class MenuController extends BaseController {
         menuSetPcode(menu);
 
         menu.setStatus(MenuStatus.ENABLE.getCode());
+        menu.setCreateTime(new Date());
+        menu.setCreateBy(ShiroKit.getUser().getName());
         this.menuService.insert(menu);
         return SUCCESS_TIP;
     }

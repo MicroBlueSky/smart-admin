@@ -3,6 +3,7 @@ package cn.newcapec.city.smart.modular.system.service.impl;
 import cn.newcapec.city.smart.core.common.constant.factory.MutiStrFactory;
 import cn.newcapec.city.smart.core.common.exception.BizExceptionEnum;
 import cn.newcapec.city.smart.core.core.exception.GunsException;
+import cn.newcapec.city.smart.core.shiro.ShiroKit;
 import cn.newcapec.city.smart.modular.system.dao.DictMapper;
 import cn.newcapec.city.smart.modular.system.model.Dict;
 import cn.newcapec.city.smart.modular.system.service.IDictService;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +43,8 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements ID
         dict.setTips(dictTips);
         dict.setNum("0");
         dict.setPid("0");
+        dict.setCreateBy(ShiroKit.getUser().getName());
+        dict.setCreateTime(new Date());
         this.dictMapper.insert(dict);
 
         //添加字典条目
@@ -52,6 +56,8 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements ID
             itemDict.setPid(dict.getId());
             itemDict.setCode(code);
             itemDict.setName(name);
+            itemDict.setUpdateBy(ShiroKit.getUser().getName());
+            itemDict.setUpdateTime(new Date());
 
             try {
                 itemDict.setNum(num);

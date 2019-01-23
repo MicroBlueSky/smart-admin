@@ -83,6 +83,7 @@ public class DictController extends BaseController {
         if (ToolUtil.isOneEmpty(dictCode,dictName, dictValues)) {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
+
         this.dictService.addDict(dictCode,dictName,dictTips,dictValues);
         return SUCCESS_TIP;
     }
