@@ -10,6 +10,7 @@ import cn.newcapec.city.smart.core.core.exception.GunsException;
 import cn.newcapec.city.smart.core.core.node.ZTreeNode;
 import cn.newcapec.city.smart.core.core.util.ToolUtil;
 import cn.newcapec.city.smart.core.log.LogObjectHolder;
+import cn.newcapec.city.smart.core.shiro.ShiroKit;
 import cn.newcapec.city.smart.modular.system.model.Dept;
 import cn.newcapec.city.smart.modular.system.service.IDeptService;
 import cn.newcapec.city.smart.modular.system.warpper.DeptWarpper;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -92,6 +94,8 @@ public class DeptController extends BaseController {
         }
         //完善pids,根据pid拿到pid的pids
         deptSetPids(dept);
+        dept.setCreateBy(ShiroKit.getUser().getName());
+        dept.setCreateTime(new Date());
         return this.deptService.insert(dept);
     }
 
@@ -128,6 +132,8 @@ public class DeptController extends BaseController {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
         deptSetPids(dept);
+        dept.setUpdateBy(ShiroKit.getUser().getName());
+        dept.setUpdateTime(new Date());
         deptService.updateById(dept);
         return SUCCESS_TIP;
     }

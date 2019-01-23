@@ -26,6 +26,13 @@ var RolInfoDlg = {
                     message: '父级名称不能为空'
                 }
             }
+        },
+        num: {
+            validators: {
+                notEmpty: {
+                    message: '排序不能为空'
+                }
+            }
         }
     }
 };

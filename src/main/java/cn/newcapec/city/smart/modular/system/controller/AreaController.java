@@ -71,7 +71,6 @@ public class AreaController extends BaseController {
     //@Permission(value = "")
     @RequestMapping("/Area_update/{AreaId}")
     public String AreaUpdate(@PathVariable String AreaId, Model model) {
-        System.out.println("=========================="+AreaId);
         Area Area = areaService.selectById(AreaId);
         model.addAttribute("item",Area);
         LogObjectHolder.me().set(Area);

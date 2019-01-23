@@ -15,6 +15,7 @@ import cn.newcapec.city.smart.core.core.node.ZTreeNode;
 import cn.newcapec.city.smart.core.core.util.Convert;
 import cn.newcapec.city.smart.core.core.util.ToolUtil;
 import cn.newcapec.city.smart.core.log.LogObjectHolder;
+import cn.newcapec.city.smart.core.shiro.ShiroKit;
 import cn.newcapec.city.smart.modular.system.model.Role;
 import cn.newcapec.city.smart.modular.system.model.User;
 import cn.newcapec.city.smart.modular.system.service.IRoleService;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -121,6 +123,8 @@ public class RoleController extends BaseController {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
         role.setId(null);
+        role.setCreateBy(ShiroKit.getUser().getName());
+        role.setCreateTime(new Date());
         this.roleService.insert(role);
         return SUCCESS_TIP;
     }
@@ -136,6 +140,8 @@ public class RoleController extends BaseController {
         if (result.hasErrors()) {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
+        role.setUpdateBy(ShiroKit.getUser().getName());
+        role.setUpdateTime(new Date());
         this.roleService.updateById(role);
 
         //删除缓存

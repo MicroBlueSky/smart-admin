@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -56,7 +57,7 @@ public class Role extends Model<Role> {
 	/**
 	 * 创建时间
 	 */
-	private String createTime;
+	private Date createTime;
 	/**
 	 * 更新人
 	 */
@@ -64,7 +65,7 @@ public class Role extends Model<Role> {
 	/**
 	 * 更新时间
 	 */
-	private String updateTime;
+	private Date updateTime;
     /**
      * 版本号
      */

@@ -14,7 +14,7 @@ var Dept = {
 Dept.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-        {title: 'id', field: 'ID', align: 'center', valign: 'middle',width:'50px'},
+        {title: 'id', field: 'ID',visible: false, align: 'center', valign: 'middle',width:'50px'},
         {title: '部门简称', field: 'SIMPLENAME', align: 'center', valign: 'middle', sortable: true},
         {title: '部门全称', field: 'FULLNAME', align: 'center', valign: 'middle', sortable: true},
         {title: '排序', field: 'NUM', align: 'center', valign: 'middle', sortable: true},
