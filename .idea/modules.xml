@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/smart-admin.iml" filepath="$PROJECT_DIR$/smart-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../smart-api/smart-api.iml" filepath="$PROJECT_DIR$/../smart-api/smart-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../smart-common/smart-common.iml" filepath="$PROJECT_DIR$/../smart-common/smart-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../smart-core/smart-core.iml" filepath="$PROJECT_DIR$/../smart-core/smart-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../smart-gateway/smart-gateway.iml" filepath="$PROJECT_DIR$/../smart-gateway/smart-gateway.iml" />
+    </modules>
+  </component>
+</project>

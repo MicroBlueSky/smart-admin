@@ -1,0 +1,129 @@
+server:
+  port: 8080
+
+guns:
+  swagger-open: true              #是否开启swagger (true/false)
+  kaptcha-open: false             #是否开启登录时验证码 (true/false)
+  file-upload-path: d:/tmp       #文件上传目录(不配置的话为java.io.tmpdir目录)
+  spring-session-open: false      #是否开启spring session,如果是多机环境需要开启(true/false)
+  session-invalidate-time: 1800     #session失效时间(只在单机环境下生效，多机环境在SpringSessionConfig类中配置) 单位：秒
+  session-validation-interval: 900  #多久检测一次失效的session(只在单机环境下生效) 单位：秒
+
+spring:
+  profiles:
+    active: @spring.active@
+  mvc:
+    static-path-pattern: /static/**
+    view:
+      prefix: /WEB-INF/view
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+      exclude: static/**,WEB-INF/view/**
+  servlet:
+    multipart:
+      max-request-size: 100MB
+      max-file-size: 100MB
+
+mybatis-plus:
+  typeAliasesPackage: cn.newcapec.city.smart.modular.system.model
+
+log:
+  path: guns-logs
+
+---
+
+spring:
+  profiles: local
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@192.168.112.42:1521:smartCity
+    username: ccense
+    password: ccense
+    db-name: CCENSE #用来搜集数据库的所有表
+    filters: wall,mergeStat
+
+############################ 下面是 Dubbo 配置 ############################
+#放到最下面会报错找不到配置
+dubbo:
+  application:
+    #指定当前服务的名称(不要和其他服务同名)
+    name: smart-admin
+    qos:
+      #禁用QOS
+      enable: false
+  registry: #指定注册中心的位置
+    id: registry1
+    address: zookeeper://192.168.112.45:2181
+    #缓存注册中心列表
+    #配置缓存文件后，应用重启过程中，若注册中心不可用，应用会从该缓存文件读取服务提供者列表，进一步保证应用可靠性
+    file: output/smart-core/dubbo.cache
+  protocol:
+    name: dubbo
+    port: 20880
+  #统一设置服务提供方的规则
+  provider:
+    timeout: 3000
+    #负载策略
+    loadbalance: roundrobin
+    #随机token令牌，使用UUID生成
+    token: true
+############################ 上面是 Dubbo 配置 ############################
+############################ 下面是 rocketMQ 配置 ############################
+rocketmq:
+  name-server: 192.168.112.45:9876
+  producer:
+    #生产者的组名
+    group: smart-admin
+    send-message-timeout: 300000
+    compress-message-body-threshold: 4096
+    max-message-size: 4194304
+    retry-times-when-send-async-failed: 0
+    retry-next-server: true
+    retry-times-when-send-failed: 2
+############################ 上面是 rocketMQ 配置 ############################
+
+
+############################下面是多数据源配置###########################
+#多数据源情况的配置
+guns:
+  muti-datasource:
+    open: false
+    url: jdbc:mysql://127.0.0.1:3306/guns_test?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+    dataSourceNames:
+      - dataSourceGuns
+      - dataSourceBiz
+
+---
+
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:oracle:thin:@127.0.0.1:1521:orcl
+    username: sun
+    password: sun
+    db-name: SUN #用来搜集数据库的所有表
+    filters: wall,mergeStat
+
+---
+
+spring:
+  profiles: test
+  datasource:
+    url: jdbc:oracle:thin:@192.168.1.107:1521:orcl
+    username: sun
+    password: sun
+    filters: wall,mergeStat
+
+---
+
+spring:
+  profiles: produce
+  datasource:
+    url: jdbc:oracle:thin:@192.168.1.107:1521:orcl
+    username: sun
+    password: sun
+    filters: wall,mergeStat

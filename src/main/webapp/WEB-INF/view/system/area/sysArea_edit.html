@@ -1,0 +1,43 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="${item.id}">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="areaCode" name="区域编号" value="${item.areaCode}" underline="true"/>
+                            <#input id="parentCode" name="父级编号" value="${item.parentCode}" underline="true"/>
+                            <#input id="parentCodes" name="所有父级编号" value="${item.parentCodes}" underline="true"/>
+                            <#input id="treeSort" name="本级排序号" value="${item.treeSort}" underline="true"/>
+                            <#input id="treeSorts" name="所有级别排序号" value="${item.treeSorts}" underline="true"/>
+                            <#input id="treeLeaf" name="是否最末级" value="${item.treeLeaf}" underline="true"/>
+                            <#input id="treeLevel" name="层次级别" value="${item.treeLevel}" underline="true"/>
+                            <#input id="treeNames" name="全节点名" value="${item.treeNames}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="areaName" name="区域名称" value="${item.areaName}" underline="true"/>
+                            <#input id="areaType" name="区域类型" value="${item.areaType}" underline="true"/>
+                            <#input id="status" name="状态（0正常 1删除 2停用）" value="${item.status}" underline="true"/>
+                            <#input id="createBy" name="创建者" value="${item.createBy}" underline="true"/>
+                            <#input id="createDate" name="创建时间" value="${item.createDate}" underline="true"/>
+                            <#input id="updateBy" name="更新者" value="${item.updateBy}" underline="true"/>
+                            <#input id="updateDate" name="更新时间" value="${item.updateDate}" underline="true"/>
+                            <#input id="remarks" name="备注信息" value="${item.remarks}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="SysAreaInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="SysAreaInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/area/sysArea_info.js"></script>
+@}

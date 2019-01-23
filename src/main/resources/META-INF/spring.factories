@@ -1,0 +1,6 @@
+# AutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+cn.newcapec.city.smart.core.core.base.controller.GlobalController,\
+cn.newcapec.city.smart.core.core.config.DefaultFastjsonConfig,\
+cn.newcapec.city.smart.core.core.config.DefaultProperties,\
+cn.newcapec.city.smart.core.core.config.DefaultWebConfig

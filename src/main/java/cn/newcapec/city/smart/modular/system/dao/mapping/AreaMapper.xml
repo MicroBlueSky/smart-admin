@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.newcapec.city.smart.modular.system.dao.AreaMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.newcapec.city.smart.modular.system.model.Area">
+        <id column="AREA_CODE" property="areaCode" />
+        <result column="PARENT_CODE" property="parentCode" />
+        <result column="PARENT_CODES" property="parentCodes" />
+        <result column="AREA_NAME" property="areaName" />
+        <result column="AREA_TYPE" property="areaType" />
+        <result column="STATUS" property="status" />
+        <result column="CREATE_BY" property="createBy" />
+        <result column="CREATE_DATE" property="createDate" />
+        <result column="UPDATE_BY" property="updateBy" />
+        <result column="UPDATE_DATE" property="updateDate" />
+        <result column="REMARKS" property="remarks" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        AREA_CODE, PARENT_CODE, PARENT_CODES, AREA_NAME, AREA_TYPE, STATUS, CREATE_BY, CREATE_DATE, UPDATE_BY, UPDATE_DATE, REMARKS
+    </sql>
+
+    <select id="selectAreas" resultType="map">
+        select
+        <include refid="Base_Column_List" />
+        from sys_area
+        where status = 0
+        <if test="condition != null and condition != ''">
+            and (AREA_NAME like  '%${condition}%'  or code like  '%${condition}%')
+        </if>
+        <if test="areaCode != null and areaCode != ''">
+            and AREA_CODE = #{areaCode}
+        </if>
+    </select>
+
+    <select id="areaTreeList" resultType="cn.newcapec.city.smart.core.core.node.ZTreeNode">
+        SELECT
+        a1.area_code AS id,
+        (
+        CASE
+        WHEN (a2.area_code = '0' OR a2.area_code IS NULL) THEN
+        '0'
+        ELSE
+        a2.area_code
+        END
+        ) AS pId,
+        a1.area_name
+        AS NAME,
+        (
+        CASE
+        WHEN (a2.area_code = '0' OR a2.area_code IS NULL) THEN
+        'true'
+        ELSE
+        'false'
+        END
+        ) as isOpen
+        FROM
+        sys_area a1
+        LEFT join sys_area a2 ON a1.parent_code = a2.area_code
+        ORDER BY
+        a1.area_code ASC
+    </select>
+
+    <select id="selectOneByAreaCode" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_area where area_code = #{areaCode}
+    </select>
+
+    <select id="selectOneByAreaCode" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_area where area_code = #{areaCode}
+    </select>
+
+
+    <insert id="insertArea" parameterType="cn.newcapec.city.smart.modular.system.model.Area">
+        INSERT into sys_area
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="areaCode != null and areaCode !=''">
+                area_code,
+            </if>
+            <if test="parentCode != null and parentCode !=''">
+                parent_code,
+            </if>
+            <if test="parentCodes != null and parentCodes !=''">
+                parent_codes,
+            </if>
+            <if test="areaName != null and areaName !=''">
+                area_name,
+            </if>
+            <if test="areaType != null and areaType !=''">
+                area_type,
+            </if>
+            <if test="status != null and status !=''">
+                status,
+            </if>
+            <if test="createBy != null and createBy !=''">
+                create_by,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateBy != null and updateBy !=''">
+                update_by,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="remarks != null and remarks !=''">
+                remarks,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="areaCode != null and areaCode !=''">
+                #{areaCode},
+            </if>
+            <if test="parentCode != null and parentCode !=''">
+                #{parentCode},
+            </if>
+            <if test="parentCodes != null and parentCodes !=''">
+                #{parentCodes},
+            </if>
+            <if test="areaName != null and areaName !=''">
+                #{areaName},
+            </if>
+            <if test="areaType != null and areaType !=''">
+                #{areaType},
+            </if>
+            <if test="status != null and status !=''">
+                #{status},
+            </if>
+            <if test="createBy != null and createBy !=''">
+                #{createBy},
+            </if>
+            <if test="createDate != null">
+                #{createDate},
+            </if>
+            <if test="updateBy != null and updateBy !=''">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=DATE},
+            </if>
+            <if test="remarks != null and remarks !=''">
+                #{remarks,javaType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>
