@@ -19,7 +19,7 @@ public class NoticeWrapper extends BaseControllerWarpper {
 
     @Override
     public void warpTheMap(Map<String, Object> map) {
-        String creater = (String) map.get("CREATER");
+        String creater = (String) map.get("CREATE_BY");
         map.put("createrName", ConstantFactory.me().getUserNameById(creater));
     }
 

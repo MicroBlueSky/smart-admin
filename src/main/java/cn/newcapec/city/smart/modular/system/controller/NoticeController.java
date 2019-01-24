@@ -70,6 +70,16 @@ public class NoticeController extends BaseController {
     }
 
     /**
+     * 跳转到内容详情页
+     */
+    @RequestMapping("/notice_detail/{noticeId}")
+    public String noticeDetail(@PathVariable String noticeId, Model model) {
+        Notice notice = this.noticeService.selectById(noticeId);
+        model.addAttribute("content",notice.getContent());
+        return PREFIX + "notice_detail.jsp";
+    }
+
+    /**
      * 跳转到首页通知
      */
     @RequestMapping("/hello")
@@ -121,8 +131,8 @@ public class NoticeController extends BaseController {
         if (ToolUtil.isOneEmpty(notice, notice.getTitle(), notice.getContent())) {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
-        notice.setCreater(ShiroKit.getUser().getId());
-        notice.setCreatetime(new Date());
+        notice.setCreateBy(ShiroKit.getUser().getId());
+        notice.setCreateTime(new Date());
         notice.insert();
         return SUCCESS_TIP;
     }
@@ -156,6 +166,8 @@ public class NoticeController extends BaseController {
         Notice old = this.noticeService.selectById(notice.getId());
         old.setTitle(notice.getTitle());
         old.setContent(notice.getContent());
+        old.setUpdateBy(ShiroKit.getUser().getId());
+        old.setUpdateTime(new Date());
         old.updateById();
         return SUCCESS_TIP;
     }

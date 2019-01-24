@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,7 +18,9 @@ import java.util.Date;
  * @author stylefeng
  * @since 2017-07-11
  */
-@TableName("sys_notice")
+@Getter
+@Setter
+@TableName("base_app_message_notice")
 public class Notice extends Model<Notice> {
 
     private static final long serialVersionUID = 1L;
@@ -31,70 +35,42 @@ public class Notice extends Model<Notice> {
      */
 	private String title;
     /**
-     * 类型
-     */
-	private Integer type;
-    /**
      * 内容
      */
 	private String content;
+	/**
+	 * 描述
+	 */
+	private  String description;
+	/**
+	 * 行业类型
+	 */
+	private  String industryType;
     /**
      * 创建时间
      */
-	private Date createtime;
+	private Date createTime;
     /**
      * 创建人
      */
-	private String creater;
+	private String createBy;
+	/**
+	 * 更新人
+	 */
+	private String updateBy;
+	/**
+	 * 更新时间
+	 */
+	private Date updateTime;
+	/**
+	 * 逻辑删除
+	 */
+	private String delFlag;
+	/**
+	 * 版本号
+	 */
+	private Integer ver;
 
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public Integer getType() {
-		return type;
-	}
-
-	public void setType(Integer type) {
-		this.type = type;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public Date getCreatetime() {
-		return createtime;
-	}
-
-	public void setCreatetime(Date createtime) {
-		this.createtime = createtime;
-	}
-
-	public String getCreater() {
-		return creater;
-	}
-
-	public void setCreater(String creater) {
-		this.creater = creater;
-	}
 
 	@Override
 	protected Serializable pkVal() {
@@ -104,12 +80,17 @@ public class Notice extends Model<Notice> {
 	@Override
 	public String toString() {
 		return "Notice{" +
-			"id=" + id +
-			", title=" + title +
-			", type=" + type +
-			", content=" + content +
-			", createtime=" + createtime +
-			", creater=" + creater +
-			"}";
+				"id='" + id + '\'' +
+				", title='" + title + '\'' +
+				", content='" + content + '\'' +
+				", description='" + description + '\'' +
+				", industryType='" + industryType + '\'' +
+				", createTime=" + createTime +
+				", createBy='" + createBy + '\'' +
+				", updateBy='" + updateBy + '\'' +
+				", updateTime=" + updateTime +
+				", delFlag='" + delFlag + '\'' +
+				", ver=" + ver +
+				'}';
 	}
 }
