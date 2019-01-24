@@ -99,12 +99,7 @@ Dept.search = function () {
 
 $(function () {
     var defaultColunms = Dept.initColumn();
-    var table = new BSTreeTable(Dept.id, "/dept/list", defaultColunms);
-    table.setExpandColumn(2);
-    table.setIdField("id");
-    table.setCodeField("id");
-    table.setParentCodeField("pid");
-    table.setExpandAll(true);
-    table.init();
-    Dept.table = table;
+    var table = new BSTable(Dept.id, "/dept/list", defaultColunms);
+    table.setPaginationType("client");
+    Dept.table = table.init();
 });
