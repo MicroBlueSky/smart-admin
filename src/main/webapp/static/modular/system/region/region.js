@@ -110,7 +110,6 @@ $(function () {
     table.setCodeField("ID");
     table.setParentCodeField("PID");
     table.setExpandAll(true);
-    table.setZTreeTools();
     Region.table = table.init();
 
 });
