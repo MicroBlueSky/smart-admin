@@ -61,7 +61,7 @@ SysAreaInfoDlg.get = function(key) {
  * 关闭此对话框
  */
 SysAreaInfoDlg.close = function() {
-    parent.layer.close(window.parent.SysArea.layerIndex);
+    parent.layer.close(window.parent.Region.layerIndex);
 }
 
 /**
@@ -92,9 +92,9 @@ SysAreaInfoDlg.addSubmit = function() {
         return;
     }
     //提交信息
-    var ajax = new $ax(Feng.ctxPath + "/area/add", function(data){
+    var ajax = new $ax(Feng.ctxPath + "/region/add", function(data){
         Feng.success("添加成功!");
-        window.parent.SysArea.table.refresh();
+        window.parent.Region.table.refresh();
         SysAreaInfoDlg.close();
     },function(data){
         Feng.error("添加失败!" + data.responseJSON.message + "!");
@@ -116,9 +116,9 @@ SysAreaInfoDlg.editSubmit = function() {
     }
 
     //提交信息
-    var ajax = new $ax(Feng.ctxPath + "/area/update", function(data){
+    var ajax = new $ax(Feng.ctxPath + "/region/update", function(data){
         Feng.success("修改成功!");
-        window.parent.SysArea.table.refresh();
+        window.parent.Region.table.refresh();
         SysAreaInfoDlg.close();
     },function(data){
         Feng.error("修改失败!" + data.responseJSON.message + "!");
@@ -149,7 +149,7 @@ SysAreaInfoDlg.showAreaSelectTree = function () {
 $(function () {
     Feng.initValidator("areaInfoForm", SysAreaInfoDlg.validateFields);
 
-    var ztree = new $ZTree("parentCodeTree", "/area/selectAreaTreeList");
+    var ztree = new $ZTree("parentCodeTree", "/region/selectAreaTreeList");
     ztree.bindOnClick(SysAreaInfoDlg.onClickDept);
     ztree.init();
     SysAreaInfoDlg.ztreeInstance = ztree;

@@ -10,32 +10,32 @@
                     <div class="col-sm-12">
                         <div class="row">
                             <div class="col-sm-3">
-                                <#NameCon id="areaName" name="名称" />
+                                <#NameCon id="name" name="名称" />
                             </div>
                             <div class="col-sm-3">
-                                <#NameCon id="areaCode" name="地市代码" />
+                                <#NameCon id="code" name="地市代码" />
                             </div>
                             <div class="col-sm-3">
-                                <#button name="搜索" icon="fa-search" clickFun="SysArea.search()"/>
+                                <#button name="搜索" icon="fa-search" clickFun="Region.search()"/>
                             </div>
                         </div>
                         <div class="hidden-xs" id="SysAreaTableToolbar" role="group">
-                            @if(shiro.hasPermission("/area/add")){
-                                <#button name="添加" icon="fa-plus" clickFun="SysArea.openAddSysArea()"/>
+                            @if(shiro.hasPermission("/region/add")){
+                                <#button name="添加" icon="fa-plus" clickFun="Region.openAddSysArea()"/>
                             @}
-                            @if(shiro.hasPermission("/area/update")){
-                                <#button name="修改" icon="fa-edit" clickFun="SysArea.openSysAreaDetail()" space="true"/>
+                            @if(shiro.hasPermission("/region/update")){
+                                <#button name="修改" icon="fa-edit" clickFun="Region.openSysAreaDetail()" space="true"/>
                             @}
-                            @if(shiro.hasPermission("/area/delete")){
-                                <#button name="删除" icon="fa-remove" clickFun="SysArea.delete()" space="true"/>
+                            @if(shiro.hasPermission("/region/delete")){
+                                <#button name="删除" icon="fa-remove" clickFun="Region.delete()" space="true"/>
                             @}
                         </div>
-                        <#table id="SysAreaTable"/>
+                        <#table id="RegionTable"/>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script src="${ctxPath}/static/modular/system/area/sysArea.js"></script>
+<script src="${ctxPath}/static/modular/system/region/region.js"></script>
 @}

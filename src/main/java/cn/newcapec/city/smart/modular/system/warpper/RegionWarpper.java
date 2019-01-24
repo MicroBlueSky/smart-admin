@@ -12,17 +12,16 @@ import java.util.Map;
  * @author fengshuonan
  * @date 2017年2月13日 下午10:47:03
  */
-public class AreaWarpper extends BaseControllerWarpper {
+public class RegionWarpper extends BaseControllerWarpper {
 
-    public AreaWarpper(List<Map<String, Object>> list) {
+    public RegionWarpper(List<Map<String, Object>> list) {
         super(list);
     }
 
     @Override
     public void warpTheMap(Map<String, Object> map) {
-        map.put("NAMECODE","("+map.get("AREA_CODE")+")"+map.get("AREA_NAME"));
-        map.put("areaType", ConstantFactory.me().getAreaType((String) map.get("AREA_TYPE")));
-        map.put("statusName", ConstantFactory.me().getAreaStatusName((String) map.get("STATUS")));
+        map.put("NAMECODE","("+map.get("CODE")+")"+map.get("NAME"));
+       // map.put("statusName", ConstantFactory.me().getAreaStatusName((String) map.get("STATUS")));
     }
 
 }

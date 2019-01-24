@@ -36,7 +36,7 @@ public class ConstantFactory implements IConstantFactory {
     private UserMapper userMapper = SpringContextHolder.getBean(UserMapper.class);
     private MenuMapper menuMapper = SpringContextHolder.getBean(MenuMapper.class);
     private NoticeMapper noticeMapper = SpringContextHolder.getBean(NoticeMapper.class);
-    private AreaMapper areaMapper = SpringContextHolder.getBean(AreaMapper.class);
+    private RegionMapper areaMapper = SpringContextHolder.getBean(RegionMapper.class);
 
     public static IConstantFactory me() {
         return SpringContextHolder.getBean("constantFactory");
@@ -355,22 +355,22 @@ public class ConstantFactory implements IConstantFactory {
         return parentDeptIds;
     }
 
-    /**
-     * 通过区域编号获取区域名称
-     */
-    @Override
-    public String getAreaNameByCode(String code) {
-        if (ToolUtil.isEmpty(code)) {
-            return "";
-        } else {
-            Area area = areaMapper.selectOneByAreaCode(code);
-            if (area == null) {
-                return "";
-            } else {
-                return area.getAreaName();
-            }
-        }
-    }
+//    /**
+//     * 通过区域编号获取区域名称
+//     */
+//    @Override
+//    public String getAreaNameByCode(String code) {
+//        if (ToolUtil.isEmpty(code)) {
+//            return "";
+//        } else {
+//            Region region = areaMapper.selectOneByAreaCode(code);
+//            if (region == null) {
+//                return "";
+//            } else {
+//                return region.getAreaName();
+//            }
+//        }
+//    }
 
 
 }

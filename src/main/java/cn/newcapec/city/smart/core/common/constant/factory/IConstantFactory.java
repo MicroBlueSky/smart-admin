@@ -123,8 +123,8 @@ public interface IConstantFactory {
      */
     List<String> getParentDeptIds(String deptid);
 
-    /**
-     * 获取菜单名称通过编号
-     */
-    String getAreaNameByCode(String code);
+//    /**
+//     * 获取菜单名称通过编号
+//     */
+//    String getAreaNameByCode(String code);
 }

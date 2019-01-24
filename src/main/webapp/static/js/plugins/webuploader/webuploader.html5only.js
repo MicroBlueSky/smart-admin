@@ -5116,7 +5116,7 @@
     // ColorSpace : 1
     // PixelXDimension : 2448
     // PixelYDimension : 3264
-    // SensingMethod : One-chip color area sensor
+    // SensingMethod : One-chip color region sensor
     // ExposureMode : 0
     // WhiteBalance : Auto white balance
     // FocalLengthIn35mmFilm : 35

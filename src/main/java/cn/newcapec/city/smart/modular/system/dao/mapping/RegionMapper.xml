@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.newcapec.city.smart.modular.system.dao.RegionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.newcapec.city.smart.modular.system.model.Region">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="code" property="code" />
+        <result column="pid" property="pid" />
+        <result column="description" property="description" />
+        <result column="create_by" property="createBy" />
+        <result column="create_time" property="createTime" />
+        <result column="update_by" property="updateBy" />
+        <result column="update_time" property="updateTime" />
+        <result column="ver" property="ver" />
+        <result column="del_flag" property="delFlag" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, code, pid, description, create_by, create_time, update_by,
+        update_time, ver, del_flag
+    </sql>
+
+    <select id="selectRegions" resultType="map">
+        select
+        <include refid="Base_Column_List" />
+        from base_app_region
+        where del_flag = 0
+        <if test="name != null and name != ''">
+            and (name like  '%${name}%'  or code like  '%${name}%')
+        </if>
+        <if test="code != null and code != ''">
+            and code = #{code}
+        </if>
+    </select>
+
+<!--
+    <select id="areaTreeList" resultType="cn.newcapec.city.smart.core.core.node.ZTreeNode">
+        SELECT
+        ar1.id AS id,
+        (
+        CASE
+        WHEN (ar2.id = '0' OR ar2.id IS NULL) THEN
+        '0'
+        ELSE
+        ar2.code
+        END
+        ) AS pId,
+        ar1.name
+        AS NAME,
+        (
+        CASE
+        WHEN (ar2.id = '0' OR ar2.id IS NULL) THEN
+        'true'
+        ELSE
+        'false'
+        END
+        ) as isOpen
+        FROM
+        base_app_region ar1
+        LEFT join base_app_region ar2 ON ar1.pid = ar2.id
+        ORDER BY
+        a1.id ASC
+    </select>
+-->
+
+   <!-- <select id="selectOneBy" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from base_app_region where code = #{code}
+    </select>
+-->
+
+    <!--<insert id="insertArea" parameterType="cn.newcapec.city.smart.modular.system.model.Region">-->
+        <!--INSERT into sys_area-->
+        <!--<trim prefix="(" suffix=")" suffixOverrides=",">-->
+            <!--<if test="areaCode != null and areaCode !=''">-->
+                <!--area_code,-->
+            <!--</if>-->
+            <!--<if test="parentCode != null and parentCode !=''">-->
+                <!--parent_code,-->
+            <!--</if>-->
+            <!--<if test="parentCodes != null and parentCodes !=''">-->
+                <!--parent_codes,-->
+            <!--</if>-->
+            <!--<if test="areaName != null and areaName !=''">-->
+                <!--area_name,-->
+            <!--</if>-->
+            <!--<if test="areaType != null and areaType !=''">-->
+                <!--area_type,-->
+            <!--</if>-->
+            <!--<if test="status != null and status !=''">-->
+                <!--status,-->
+            <!--</if>-->
+            <!--<if test="createBy != null and createBy !=''">-->
+                <!--create_by,-->
+            <!--</if>-->
+            <!--<if test="createDate != null">-->
+                <!--create_date,-->
+            <!--</if>-->
+            <!--<if test="updateBy != null and updateBy !=''">-->
+                <!--update_by,-->
+            <!--</if>-->
+            <!--<if test="updateDate != null">-->
+                <!--update_date,-->
+            <!--</if>-->
+            <!--<if test="remarks != null and remarks !=''">-->
+                <!--remarks,-->
+            <!--</if>-->
+        <!--</trim>-->
+        <!--<trim prefix="values (" suffix=")" suffixOverrides=",">-->
+            <!--<if test="areaCode != null and areaCode !=''">-->
+                <!--#{areaCode},-->
+            <!--</if>-->
+            <!--<if test="parentCode != null and parentCode !=''">-->
+                <!--#{parentCode},-->
+            <!--</if>-->
+            <!--<if test="parentCodes != null and parentCodes !=''">-->
+                <!--#{parentCodes},-->
+            <!--</if>-->
+            <!--<if test="areaName != null and areaName !=''">-->
+                <!--#{areaName},-->
+            <!--</if>-->
+            <!--<if test="areaType != null and areaType !=''">-->
+                <!--#{areaType},-->
+            <!--</if>-->
+            <!--<if test="status != null and status !=''">-->
+                <!--#{status},-->
+            <!--</if>-->
+            <!--<if test="createBy != null and createBy !=''">-->
+                <!--#{createBy},-->
+            <!--</if>-->
+            <!--<if test="createDate != null">-->
+                <!--#{createDate},-->
+            <!--</if>-->
+            <!--<if test="updateBy != null and updateBy !=''">-->
+                <!--#{updateBy,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="updateDate != null">-->
+                <!--#{updateDate,jdbcType=DATE},-->
+            <!--</if>-->
+            <!--<if test="remarks != null and remarks !=''">-->
+                <!--#{remarks,javaType=VARCHAR},-->
+            <!--</if>-->
+        <!--</trim>-->
+    <!--</insert>-->
+</mapper>

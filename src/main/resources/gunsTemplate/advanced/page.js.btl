@@ -44,7 +44,7 @@ ${context.bizEnBigName}.openAdd${context.bizEnBigName} = function () {
     var index = layer.open({
         type: 2,
         title: '添加${context.bizChName}',
-        area: ['800px', '420px'], //宽高
+        region: ['800px', '420px'], //宽高
         fix: false, //不固定
         //maxmin: true,
         content: Feng.ctxPath + '/${context.bizEnName}/${context.bizEnName}_add'
@@ -61,7 +61,7 @@ ${context.bizEnBigName}.open${context.bizEnBigName}Detail = function () {
         var index = layer.open({
             type: 2,
             title: '${context.bizChName}详情',
-            area: ['800px', '420px'], //宽高
+            region: ['800px', '420px'], //宽高
             fix: false, //不固定
             //maxmin: true,
             content: Feng.ctxPath + '/${context.bizEnName}/${context.bizEnName}_update/' + ${context.bizEnBigName}.seItem.ID
