@@ -114,6 +114,5 @@ $(function () {
     table.setCodeField("CODE");
     table.setParentCodeField("PCODE");
     table.setExpandAll(true);
-    table.init();
-    Menu.table = table;
+    Menu.table = table.init();
 });
