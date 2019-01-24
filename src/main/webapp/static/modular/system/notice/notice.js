@@ -16,9 +16,13 @@ Notice.initColumn = function () {
         {field: 'selectItem', radio: true},
         {title: 'id', field: 'ID', visible: false, align: 'center', valign: 'middle'},
         {title: '标题', field: 'TITLE', align: 'center', valign: 'middle', sortable: true},
-        {title: '内容', field: 'CONTENT', align: 'center', valign: 'middle', sortable: true},
-        {title: '发布者', field: 'createrName', align: 'center', valign: 'middle', sortable: true},
-        {title: '创建时间', field: 'CREATETIME', align: 'center', valign: 'middle', sortable: true}
+        {title: '内容', field: 'CONTENT', align: 'center', valign: 'middle', sortable: true,
+            formatter:function(){
+                return "<button style='border: none;background: none;' onclick='"+"Notice.openDetailNotice()"+"'>详情</button>";
+            }
+        },
+        {title: '发布者', field: 'CREATE_BY', align: 'center', valign: 'middle', sortable: true},
+        {title: '创建时间', field: 'CREATE_TIME', align: 'center', valign: 'middle', sortable: true}
     ];
 };
 
@@ -63,6 +67,23 @@ Notice.openNoticeDetail = function () {
             fix: false, //不固定
             maxmin: true,
             content: Feng.ctxPath + '/notice/notice_update/' + Notice.seItem.ID
+        });
+        this.layerIndex = index;
+    }
+};
+
+/**
+ * 打开查看通知详情
+ */
+Notice.openDetailNotice = function () {
+    if (this.check()) {
+        var index = layer.open({
+            type: 2,
+            title: '内容详情',
+            area: ['365px', '400px'], //宽高
+            fix: false, //不固定
+            maxmin: true,
+            content: Feng.ctxPath + '/notice/notice_detail/' + Notice.seItem.ID
         });
         this.layerIndex = index;
     }
