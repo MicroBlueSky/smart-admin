@@ -1,25 +1,18 @@
 /**
  * 初始化区域管理详情对话框
  */
-var SysAreaInfoDlg = {
-    sysAreaInfoData : {},
+var RegionInfoDlg = {
+    regionInfoData : {},
     ztreeInstance: null,
     validateFields: {
-        areaName: {
+        name: {
             validators: {
                 notEmpty: {
                     message: '区域名称不能为空'
                 }
             }
         },
-        areaType: {
-            validators: {
-                notEmpty: {
-                    message: '区域类型不能为空'
-                }
-            }
-        },
-        areaCode: {
+        code: {
             validators: {
                 notEmpty: {
                     message: '区域编号不能为空'
@@ -32,8 +25,8 @@ var SysAreaInfoDlg = {
 /**
  * 清除数据
  */
-SysAreaInfoDlg.clearData = function() {
-    this.sysAreaInfoData = {};
+RegionInfoDlg.clearData = function() {
+    this.regionInfoData = {};
 }
 
 /**
@@ -42,8 +35,8 @@ SysAreaInfoDlg.clearData = function() {
  * @param key 数据的名称
  * @param val 数据的具体值
  */
-SysAreaInfoDlg.set = function(key, val) {
-    this.sysAreaInfoData[key] = (typeof val == "undefined") ? $("#" + key).val() : val;
+RegionInfoDlg.set = function(key, val) {
+    this.regionInfoData[key] = (typeof val == "undefined") ? $("#" + key).val() : val;
     return this;
 }
 
@@ -53,37 +46,37 @@ SysAreaInfoDlg.set = function(key, val) {
  * @param key 数据的名称
  * @param val 数据的具体值
  */
-SysAreaInfoDlg.get = function(key) {
+RegionInfoDlg.get = function(key) {
     return $("#" + key).val();
 }
 
 /**
  * 关闭此对话框
  */
-SysAreaInfoDlg.close = function() {
+RegionInfoDlg.close = function() {
     parent.layer.close(window.parent.Region.layerIndex);
 }
 
 /**
  * 收集数据
  */
-SysAreaInfoDlg.collectData = function() {
-    this.set('areaCode').set('parentCode').set('areaName').set('areaType').set('remarks');
+RegionInfoDlg.collectData = function() {
+    this.set('id').set('name').set('pid').set('description').set('code');
 }
 
 /**
  * 验证数据是否为空
  */
-SysAreaInfoDlg.validate = function () {
-    $('#areaInfoForm').data("bootstrapValidator").resetForm();
-    $('#areaInfoForm').bootstrapValidator('validate');
-    return $("#areaInfoForm").data('bootstrapValidator').isValid();
+RegionInfoDlg.validate = function () {
+    $('#regionInfoForm').data("bootstrapValidator").resetForm();
+    $('#regionInfoForm').bootstrapValidator('validate');
+    return $("#regionInfoForm").data('bootstrapValidator').isValid();
 }
 
 /**
  * 提交添加
  */
-SysAreaInfoDlg.addSubmit = function() {
+RegionInfoDlg.addSubmit = function() {
 
     this.clearData();
     this.collectData();
@@ -95,18 +88,18 @@ SysAreaInfoDlg.addSubmit = function() {
     var ajax = new $ax(Feng.ctxPath + "/region/add", function(data){
         Feng.success("添加成功!");
         window.parent.Region.table.refresh();
-        SysAreaInfoDlg.close();
+        RegionInfoDlg.close();
     },function(data){
         Feng.error("添加失败!" + data.responseJSON.message + "!");
     });
-    ajax.set(this.sysAreaInfoData);
+    ajax.set(this.regionInfoData);
     ajax.start();
 }
 
 /**
  * 提交修改
  */
-SysAreaInfoDlg.editSubmit = function() {
+RegionInfoDlg.editSubmit = function () {
 
     this.clearData();
     this.collectData();
@@ -116,48 +109,38 @@ SysAreaInfoDlg.editSubmit = function() {
     }
 
     //提交信息
-    var ajax = new $ax(Feng.ctxPath + "/region/update", function(data){
+    var ajax = new $ax(Feng.ctxPath + "/region/update", function(data) {
         Feng.success("修改成功!");
         window.parent.Region.table.refresh();
-        SysAreaInfoDlg.close();
-    },function(data){
+        RegionInfoDlg.close();
+    }, function(data) {
         Feng.error("修改失败!" + data.responseJSON.message + "!");
     });
-    ajax.set(this.sysAreaInfoData);
+    ajax.set(this.regionInfoData);
     ajax.start();
 }
 
-$(function() {
-
-});
 
 /**
  * 点击父级编号input框时
  */
-SysAreaInfoDlg.onClickDept = function (e, treeId, treeNode) {
-    $("#parentCode").attr("value", treeNode.id);
+RegionInfoDlg.onClickDept = function (e, treeId, treeNode) {
+    $("#pName").attr("value", RegionInfoDlg.ztreeInstance.getSelectedVal());
+    $("#pid").attr("value", treeNode.id);
 };
 
 
 /**
  * 显示父级菜单选择的树
  */
-SysAreaInfoDlg.showAreaSelectTree = function () {
-    Feng.showInputTree("parentCode", "parentCodeDiv", 15, 34);
+RegionInfoDlg.showRegionSelectTree = function () {
+    Feng.showInputTree("pName", "pIdDiv", 15, 34);
 };
 
 $(function () {
-    Feng.initValidator("areaInfoForm", SysAreaInfoDlg.validateFields);
-
-    var ztree = new $ZTree("parentCodeTree", "/region/selectAreaTreeList");
-    ztree.bindOnClick(SysAreaInfoDlg.onClickDept);
+    Feng.initValidator("regionInfoForm", RegionInfoDlg.validateFields);
+    var ztree = new $ZTree("pIdTree", "/region/selectRegionTreeList");
+    ztree.bindOnClick(RegionInfoDlg.onClickDept);
     ztree.init();
-    SysAreaInfoDlg.ztreeInstance = ztree;
-
-    //初始化是否是菜单
-    if($("#typeValue").val() == undefined){
-        $("#areaType").val(1);
-    }else{
-        $("#areaType").val($("#typeValue").val());
-    }
+    RegionInfoDlg.ztreeInstance = ztree;
 });

@@ -2,7 +2,6 @@ package cn.newcapec.city.smart.core.common.constant.factory;
 
 import cn.newcapec.city.smart.core.common.constant.cache.Cache;
 import cn.newcapec.city.smart.core.common.constant.cache.CacheKey;
-import cn.newcapec.city.smart.core.common.constant.state.AreaStatus;
 import cn.newcapec.city.smart.core.common.constant.state.ManagerStatus;
 import cn.newcapec.city.smart.core.common.constant.state.MenuStatus;
 import cn.newcapec.city.smart.core.core.support.StrKit;
@@ -36,7 +35,7 @@ public class ConstantFactory implements IConstantFactory {
     private UserMapper userMapper = SpringContextHolder.getBean(UserMapper.class);
     private MenuMapper menuMapper = SpringContextHolder.getBean(MenuMapper.class);
     private NoticeMapper noticeMapper = SpringContextHolder.getBean(NoticeMapper.class);
-    private RegionMapper areaMapper = SpringContextHolder.getBean(RegionMapper.class);
+    private RegionMapper RegionMapper = SpringContextHolder.getBean(RegionMapper.class);
 
     public static IConstantFactory me() {
         return SpringContextHolder.getBean("constantFactory");
@@ -278,21 +277,21 @@ public class ConstantFactory implements IConstantFactory {
         return MenuStatus.valueOfs(status);
     }
 
-    /**
-     * 获取区域名称
-     */
-    @Override
-    public String getAreaType(String areaType) {
-        return getDictsByName("区域类型", areaType);
-    }
+//    /**
+//     * 获取区域名称
+//     */
+//    @Override
+//    public String getAreaType(String areaType) {
+//        return getDictsByName("区域类型", areaType);
+//    }
 
-    /**
-     * 获取区域状态
-     */
-    @Override
-    public String getAreaStatusName(String status) {
-        return AreaStatus.valueOfs(status);
-    }
+//    /**
+//     * 获取区域状态
+//     */
+//    @Override
+//    public String getAreaStatusName(String status) {
+//        return AreaStatus.valueOfs(status);
+//    }
 
     /**
      * 查询字典
@@ -355,22 +354,22 @@ public class ConstantFactory implements IConstantFactory {
         return parentDeptIds;
     }
 
-//    /**
-//     * 通过区域编号获取区域名称
-//     */
-//    @Override
-//    public String getAreaNameByCode(String code) {
-//        if (ToolUtil.isEmpty(code)) {
-//            return "";
-//        } else {
-//            Region region = areaMapper.selectOneByAreaCode(code);
-//            if (region == null) {
-//                return "";
-//            } else {
-//                return region.getAreaName();
-//            }
-//        }
-//    }
+    /**
+     * 通过区域编号获取区域名称
+     */
+    @Override
+    public String getRegionNameByCode(String code) {
+        if (ToolUtil.isEmpty(code)) {
+            return "";
+        } else {
+            Region region = RegionMapper.selectRegionByCode(code);
+            if (region == null) {
+                return "";
+            } else {
+                return region.getName();
+            }
+        }
+    }
 
 
 }

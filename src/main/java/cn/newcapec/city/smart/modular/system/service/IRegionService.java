@@ -24,4 +24,12 @@ public interface IRegionService extends IService<Region> {
      * @return
      */
     List<Map<String, Object>> selectRegions(@Param("code") String condition, @Param("code") String code);
+
+    /**
+     * 获取区域列表树
+     *
+     * @return
+     * @date 2017年2月19日 下午1:33:51
+     */
+    List<ZTreeNode> regionTreeList();
 }

@@ -40,14 +40,14 @@ Region.check = function () {
 /**
  * 点击添加区域管理
  */
-Region.openAddSysArea = function () {
+Region.openAddRegion = function () {
     var index = layer.open({
         type: 2,
         title: '添加区域',
         area: ['800px', '420px'], //宽高
         fix: false, //不固定
         maxmin: true,
-        content: Feng.ctxPath + '/region/Area_add'
+        content: Feng.ctxPath + '/region/region_add'
     });
     layer.full(index);
     this.layerIndex = index;
@@ -56,7 +56,7 @@ Region.openAddSysArea = function () {
 /**
  * 打开查看区域管理详情
  */
-Region.openSysAreaDetail = function () {
+Region.openRegionDetail = function () {
     if (this.check()) {
         var index = layer.open({
             type: 2,
@@ -64,7 +64,7 @@ Region.openSysAreaDetail = function () {
             area: ['800px', '420px'], //宽高
             fix: false, //不固定
             maxmin: true,
-            content: Feng.ctxPath + '/region/Area_update/' + Region.seItem.ID
+            content: Feng.ctxPath + '/region/region_edit/' + Region.seItem.ID
         });
         layer.full(index);
         this.layerIndex = index;
@@ -78,29 +78,31 @@ Region.delete = function () {
     if (this.check()) {
 
         var operation = function(){
-            var areacode = Region.seItem.ID;
+            var id = Region.seItem.ID;
             var ajax = new $ax(Feng.ctxPath + "/region/delete", function () {
                 Feng.success("删除成功!");
-                MgrUser.table.refresh();
+                Region.table.refresh();
             }, function (data) {
                 Feng.error("删除失败!" + data.responseJSON.message + "!");
             });
-            ajax.set("areacode", areacode);
+            ajax.set("id", id);
             ajax.start();
         };
 
-        Feng.confirm("是否删除用户" + Region.seItem.ACOUNT + "?",operation);
+        Feng.confirm("是否删除该区域?",operation);
     }
 };
 
+
 /**
- * 查询区域管理列表
+ * 查询区域
  */
 Region.search = function () {
     var queryData = {};
-    queryData['condition'] = $("#condition").val();
+    queryData['name'] = $("#name").val();
+    queryData['code'] = $("#code").val();
     Region.table.refresh({query: queryData});
-};
+}
 
 $(function () {
     var defaultColunms = Region.initColumn();

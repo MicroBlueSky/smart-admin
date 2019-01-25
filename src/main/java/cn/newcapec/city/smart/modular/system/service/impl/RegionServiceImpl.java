@@ -1,5 +1,6 @@
 package cn.newcapec.city.smart.modular.system.service.impl;
 
+import cn.newcapec.city.smart.core.core.node.ZTreeNode;
 import cn.newcapec.city.smart.modular.system.dao.RegionMapper;
 import cn.newcapec.city.smart.modular.system.model.Region;
 import cn.newcapec.city.smart.modular.system.service.IRegionService;
@@ -28,5 +29,10 @@ public class RegionServiceImpl extends ServiceImpl<RegionMapper, Region> impleme
     @Override
     public List<Map<String, Object>> selectRegions(String name, String code) {
         return regionMapper.selectRegions(name,code);
+    }
+
+    @Override
+    public List<ZTreeNode> regionTreeList() {
+        return regionMapper.regionTreeList();
     }
 }

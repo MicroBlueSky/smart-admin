@@ -23,4 +23,20 @@ public interface RegionMapper extends BaseMapper<Region> {
      * @date 2019年1月24日 下午2:30:00
      */
     List<Map<String, Object>> selectRegions(@Param("name") String name, @Param("code") String code);
+
+    /**
+     * 获取区域列表树
+     *
+     * @return
+     * @date 2019年1月25日
+     */
+    List<ZTreeNode> regionTreeList();
+
+    /**
+     * 通过区域代码获取区域名称
+     *
+     * @return
+     * @date 2019年1月25日
+     */
+    Region selectRegionByCode(String code);
 }

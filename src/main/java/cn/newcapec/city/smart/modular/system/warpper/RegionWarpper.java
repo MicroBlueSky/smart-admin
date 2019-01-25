@@ -21,7 +21,6 @@ public class RegionWarpper extends BaseControllerWarpper {
     @Override
     public void warpTheMap(Map<String, Object> map) {
         map.put("NAMECODE","("+map.get("CODE")+")"+map.get("NAME"));
-       // map.put("statusName", ConstantFactory.me().getAreaStatusName((String) map.get("STATUS")));
     }
 
 }

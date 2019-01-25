@@ -23,55 +23,45 @@
         update_time, ver, del_flag
     </sql>
 
-    <select id="selectRegions" resultType="map">
+    <select id="selectRegions" parameterType="string" resultType="map">
         select
         <include refid="Base_Column_List" />
         from base_app_region
         where del_flag = 0
         <if test="name != null and name != ''">
-            and (name like  '%${name}%'  or code like  '%${name}%')
+            and (name like  '%${name}%')
         </if>
         <if test="code != null and code != ''">
             and code = #{code}
         </if>
     </select>
 
-<!--
-    <select id="areaTreeList" resultType="cn.newcapec.city.smart.core.core.node.ZTreeNode">
+    <select id="regionTreeList" resultType="cn.newcapec.city.smart.core.core.node.ZTreeNode">
         SELECT
-        ar1.id AS id,
+        r1.id AS id,
         (
         CASE
-        WHEN (ar2.id = '0' OR ar2.id IS NULL) THEN
+        WHEN (to_char(r2.id) = '0' OR to_char(r2.id) IS NULL) THEN
         '0'
         ELSE
-        ar2.code
+        to_char(r2.id)
         END
         ) AS pId,
-        ar1.name
-        AS NAME,
-        (
-        CASE
-        WHEN (ar2.id = '0' OR ar2.id IS NULL) THEN
-        'true'
-        ELSE
-        'false'
-        END
-        ) as isOpen
+        r1.name
+        AS NAME
         FROM
-        base_app_region ar1
-        LEFT join base_app_region ar2 ON ar1.pid = ar2.id
+        base_app_region r1
+        LEFT join base_app_region r2 ON r1.pid = r2.id where r1.del_flag = 0
         ORDER BY
-        a1.id ASC
+        r1.id ASC
     </select>
--->
 
-   <!-- <select id="selectOneBy" parameterType="string" resultMap="BaseResultMap">
+    <select id="selectRegionByCode" parameterType="string" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from base_app_region where code = #{code}
+        from base_app_region where del_flag = 0 and code = #{code}
     </select>
--->
+
 
     <!--<insert id="insertArea" parameterType="cn.newcapec.city.smart.modular.system.model.Region">-->
         <!--INSERT into sys_area-->

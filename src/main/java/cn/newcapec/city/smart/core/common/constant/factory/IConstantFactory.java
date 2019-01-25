@@ -93,15 +93,15 @@ public interface IConstantFactory {
      */
     String getMenuStatusName(String status);
 
-    /**
-     * 获取区域状态
-     */
-    String getAreaType(String areaType);
+//    /**
+//     * 获取区域状态
+//     */
+//    String getAreaType(String areaType);
 
-    /**
-     * 获取区域状态
-     */
-    String getAreaStatusName(String status);
+//    /**
+//     * 获取区域状态
+//     */
+//    String getAreaStatusName(String status);
 
     /**
      * 查询字典
@@ -123,8 +123,8 @@ public interface IConstantFactory {
      */
     List<String> getParentDeptIds(String deptid);
 
-//    /**
-//     * 获取菜单名称通过编号
-//     */
-//    String getAreaNameByCode(String code);
+    /**
+     * 获取菜单名称通过编号
+     */
+    String getRegionNameByCode(String code);
 }
