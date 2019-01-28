@@ -277,21 +277,21 @@ public class ConstantFactory implements IConstantFactory {
         return MenuStatus.valueOfs(status);
     }
 
-//    /**
-//     * 获取区域名称
-//     */
-//    @Override
-//    public String getAreaType(String areaType) {
-//        return getDictsByName("区域类型", areaType);
-//    }
+    /**
+     * 获取区域名称
+     */
+    /*@Override
+    public String getAreaType(String areaType) {
+        return getDictsByName("区域类型", areaType);
+    }*/
 
-//    /**
-//     * 获取区域状态
-//     */
-//    @Override
-//    public String getAreaStatusName(String status) {
-//        return AreaStatus.valueOfs(status);
-//    }
+    /**
+     * 获取区域状态
+     */
+    /*@Override
+    public String getAreaStatusName(String status) {
+        return AreaStatus.valueOfs(status);
+    }*/
 
     /**
      * 查询字典
@@ -371,5 +371,23 @@ public class ConstantFactory implements IConstantFactory {
         }
     }
 
+    /**
+     * @Description :通过id和区域代码查询除该id之外的
+     * @return
+     * @CreateDate:     2019/1/28 10:10
+     */
+    @Override
+    public String getRegionByIdAndCode(String id, String code) {
+        if (ToolUtil.isEmpty(code) && ToolUtil.isEmpty(id)) {
+            return "";
+        } else {
+            Region region = RegionMapper.selectRegionByIdAndCode(id,code);
+            if (region == null) {
+                return "";
+            } else {
+                return region.getCode();
+            }
+        }
+    }
 
 }

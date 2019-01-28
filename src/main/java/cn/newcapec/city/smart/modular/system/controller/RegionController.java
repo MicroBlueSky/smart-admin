@@ -149,6 +149,11 @@ public class RegionController extends BaseController {
     @ResponseBody
     public Object update(Region region) {
 
+        //查询更新的数据之外的是否有重复编码
+        String existedRegionCode = ConstantFactory.me().getRegionByIdAndCode(region.getId(),region.getCode());
+        if (ToolUtil.isNotEmpty(existedRegionCode)) {
+            throw new GunsException(BizExceptionEnum.EXISTED_THE_REGION);
+        }
         region.setUpdateBy(ShiroKit.getUser().getName());
         region.setUpdateTime(new Date());
         regionService.updateById(region);

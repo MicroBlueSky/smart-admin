@@ -35,4 +35,5 @@ public class RegionServiceImpl extends ServiceImpl<RegionMapper, Region> impleme
     public List<ZTreeNode> regionTreeList() {
         return regionMapper.regionTreeList();
     }
+
 }

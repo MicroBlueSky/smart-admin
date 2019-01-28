@@ -1,6 +1,7 @@
 package cn.newcapec.city.smart.core.common.constant.factory;
 
 import cn.newcapec.city.smart.modular.system.model.Dict;
+import cn.newcapec.city.smart.modular.system.model.Region;
 
 import java.util.List;
 
@@ -127,4 +128,10 @@ public interface IConstantFactory {
      * 获取菜单名称通过编号
      */
     String getRegionNameByCode(String code);
+
+    /**
+     * @Description :通过区域编码和id获取是否有重复的区域代码
+     * @CreateDate:     2019/1/28 10:13
+     */
+    String getRegionByIdAndCode(String id, String code);
 }

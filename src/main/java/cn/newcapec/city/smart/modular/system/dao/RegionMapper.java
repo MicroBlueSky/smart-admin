@@ -39,4 +39,11 @@ public interface RegionMapper extends BaseMapper<Region> {
      * @date 2019年1月25日
      */
     Region selectRegionByCode(String code);
+
+    /**
+     * @Description :syf
+     * @return
+     * @CreateDate:     2019/1/28 9:58
+     */
+    Region selectRegionByIdAndCode(String id, String code);
 }
