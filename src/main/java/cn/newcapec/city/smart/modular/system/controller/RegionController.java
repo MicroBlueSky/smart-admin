@@ -105,7 +105,7 @@ public class RegionController extends BaseController {
      * 新增区域
      */
     @Permission(Const.ADMIN_NAME)
-    @BussinessLog(value = "区域新增", key = "code,name", dict = RegionDict.class)
+    @BussinessLog(value = "区域新增", key = "code", dict = RegionDict.class)
     @RequestMapping(value = "/add")
     @ResponseBody
     public Tip add(Region region, BindingResult result) {
@@ -133,6 +133,7 @@ public class RegionController extends BaseController {
      */
     @RequestMapping(value = "/delete")
     @ResponseBody
+    @BussinessLog(value = "删除区域",key = "code",dict = RegionDict.class)
     public Object delete(@RequestParam String id) {
         System.out.println(id);
         //查询该区域
@@ -147,6 +148,7 @@ public class RegionController extends BaseController {
      */
     @RequestMapping(value = "/update")
     @ResponseBody
+    @BussinessLog(value = "修改区域",key = "id",dict = RegionDict.class)
     public Object update(Region region) {
 
         //查询更新的数据之外的是否有重复编码
